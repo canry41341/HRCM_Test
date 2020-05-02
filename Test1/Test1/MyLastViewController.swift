@@ -20,28 +20,23 @@ class MyLastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-
         let ImageString = self.verificationURL
-        let imageUrl = NSURL(string: ImageString)
-        let imageData = NSData(contentsOf: imageUrl!  as URL)
-        
-        if(imageData != nil){
-           MyLastIMG.image = UIImage(data: imageData! as Data)
-            MyLastIMG.contentMode = .scaleAspectFit
-        
+        let imageUrl = NSURL(string: ImageString)//parsing images via URLSession
+            DispatchQueue.global(qos: .background).async {
+                URLSession.shared.dataTask(with: imageUrl! as URL) { (data, response, error) in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.MyLastIMG.image = image
+                            self.MyLastID.text = "ID: " + self.verificationId
+                            self.MyLastTitles.text = self.verificationTitle
+                            
+                        }
+                    } else {
+                    }
+                }.resume()
+                
+            }
+            
         }
-        
-        MyLastID.text = "ID: " + self.verificationId
-        MyLastTitles.text = self.verificationTitle
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

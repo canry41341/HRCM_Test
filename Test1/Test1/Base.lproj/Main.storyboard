@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d1g-Uc-Dbq">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,31 +23,43 @@
                                     <segue destination="X2V-1u-ML8" kind="show" id="c90-Eo-NSj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JSON PlaceHolder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju7-uh-MCC">
+                                <rect key="frame" x="102.5" y="125" width="170" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ju7-uh-MCC" secondAttribute="height" multiplier="2:1" id="Elj-l8-qOR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2if-Bb-JnT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2EH-g6-Uup"/>
+                            <constraint firstItem="Ju7-uh-MCC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8eH-jP-rmp"/>
                             <constraint firstItem="2if-Bb-JnT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cxr-bB-MJG"/>
+                            <constraint firstItem="2if-Bb-JnT" firstAttribute="top" secondItem="Ju7-uh-MCC" secondAttribute="bottom" constant="108.5" id="p9a-ks-YJK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nqs-Bq-9v9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="778" y="27"/>
+            <point key="canvasLocation" x="900" y="27.436281859070466"/>
         </scene>
         <!--My Last View Controller-->
         <scene sceneID="wpv-jq-5sm">
             <objects>
-                <viewController storyboardIdentifier="LastView" id="0Lr-pA-JAx" customClass="MyLastViewController" customModule="Test1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LastView" wantsFullScreenLayout="YES" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="0Lr-pA-JAx" customClass="MyLastViewController" customModule="Test1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UOd-VK-6De">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mRa-rz-CmQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="334"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="310"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-jA-Meh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加載中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-jA-Meh">
                                 <rect key="frame" x="15" y="409" width="345" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Kmq-jA-Meh" secondAttribute="height" multiplier="115:7" id="Z8o-Pz-goq"/>
@@ -58,7 +68,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHE-la-v3Q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加載中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHE-la-v3Q">
                                 <rect key="frame" x="15" y="466" width="345" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CHE-la-v3Q" secondAttribute="height" multiplier="344:21" id="2yz-ov-c5u"/>
@@ -86,6 +96,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Enp-2Z-z3W"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bSY-FA-Etw"/>
                     <connections>
                         <outlet property="MyLastID" destination="Kmq-jA-Meh" id="2wg-lg-8Re"/>
                         <outlet property="MyLastIMG" destination="mRa-rz-CmQ" id="FLz-Ai-0qQ"/>
@@ -94,12 +105,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJz-Aa-5qY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280.8000000000002" y="28.335832083958024"/>
+            <point key="canvasLocation" x="2428" y="26.53673163418291"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="uNw-hb-yKp">
             <objects>
-                <viewController storyboardIdentifier="SecondView" id="X2V-1u-ML8" customClass="SecondViewController" customModule="Test1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondView" wantsFullScreenLayout="YES" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="X2V-1u-ML8" customClass="SecondViewController" customModule="Test1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C1d-dP-8Lj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +133,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="0Lr-pA-JAx" kind="show" identifier="segue" id="neq-nK-GbX"/>
+                                            <segue destination="0Lr-pA-JAx" kind="push" identifier="segue" id="neq-nK-GbX"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -136,6 +147,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1XB-8G-gtC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="a3Q-Fi-XVO"/>
                     <connections>
                         <outlet property="JsonCollectionView" destination="W7f-zX-bmi" id="YVV-JV-Jfe"/>
                         <outlet property="JsonCollectionViewLayout" destination="t3E-jC-miM" id="d62-OE-0Fb"/>
@@ -143,7 +155,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TWl-eg-Cl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="27"/>
+            <point key="canvasLocation" x="1655.2" y="26.53673163418291"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oPk-CH-0Og">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d1g-Uc-Dbq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3pA-0D-te3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xAp-Oy-alS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GE8-gJ-Yk7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39.200000000000003" y="27.436281859070466"/>
         </scene>
     </scenes>
 </document>

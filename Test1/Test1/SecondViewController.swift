@@ -21,8 +21,9 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
     var globalID: Int = 0
     var globalURL: String = ""
     var globalTitle: String = ""
+    var imagecache = NSCache<NSURL,UIImage>()//NSCache
     
-    struct User {
+    struct User { //for saving my data from parsing JSON-Array
         var albumID: Int
         var id: Int
         var title: String
@@ -44,38 +45,47 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.count
 
-
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let row = model[indexPath.row];
-        //print(row)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Itemcell", for: indexPath) as! MyCollectionViewCell;
         
-
-        if(model.count != 0){
+        let row = model[indexPath.row];//initiate datas
+        let ImageString = row.thumbnailUrl
+        let imageUrl = NSURL(string: ImageString)
+        
+        DispatchQueue.main.async {
+        if(self.model.count != 0){
             if let title = row.title as? String{
                 cell.MycellTitle.text = title
                 cell.MycellTitle.adjustsFontSizeToFitWidth=true
             }
             if let id = row.id as? Int{
                 cell.MycellID.text = String(id)
-                
             }
-            
-            let ImageString = row.thumbnailUrl
-            let imageUrl = NSURL(string: ImageString)
-            let imageData = NSData(contentsOf: imageUrl!  as URL)
-            
-            if(imageData != nil){
-                cell.MycellImage.image = UIImage(data: imageData! as Data)
             }
-            
+        
         }
-        //cell.MycellID.text = self.model[0].id as? String
-        //cell.MycellTitle.text = self.model[0].title
-        //print("successed")
-         return cell;
+        
+        if let imagefromcache = self.imagecache.object(forKey: imageUrl!){//to compare with NSCache, if equals mean it's saved
+            cell.MycellImage.image = imagefromcache
+        }else{
+            DispatchQueue.global(qos: .background).async {//Parsing Images
+                URLSession.shared.dataTask(with: imageUrl! as URL) { (data, response, error) in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            let imagetocache = UIImage(data: data)
+                            self.imagecache.setObject(imagetocache!, forKey: imageUrl!)
+                            cell.MycellImage.image = imagetocache
+                            
+                        }
+                    } else {
+                    }
+                }.resume()
+            }
+        }
+         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -99,11 +109,12 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mData = model[indexPath.row]
-        
+        //saving my datas in use of next view
         self.globalID = mData.id
         self.globalURL = mData.url
         self.globalTitle = mData.title
-        
+
+        //changing view by using segue
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destination = storyboard.instantiateViewController(withIdentifier: "LastView") as! MyLastViewController
         navigationController?.pushViewController(destination, animated: true)
@@ -112,7 +123,7 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segue" {
+        if segue.identifier == "segue" {//passing datas with segue
             // Setup new view controller
             let vc = segue.destination as! MyLastViewController
             vc.verificationId = String(self.globalID)
@@ -121,7 +132,7 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
         }
     }
     
-    func loadData(){
+    func loadData(){//parsing URL into models
         let task = URLSession.shared.dataTask(with: apiUrl!){
             (data , response , error) in
             guard let dataResponse = data,
@@ -147,38 +158,24 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
             }
         }
         task.resume()
+        
+        
     }
     
     override func viewDidLoad() {
+        DispatchQueue.global(qos: .background).async {
+            self.loadData()
+        }
         super.viewDidLoad()
+        //initailize all the object's instance
         JsonCollectionView.delegate = self
         JsonCollectionView.dataSource = self
         JsonCollectionViewLayout.minimumInteritemSpacing = 0
         JsonCollectionViewLayout.minimumLineSpacing = 0
         JsonCollectionViewLayout.scrollDirection = .vertical
         JsonCollectionView.register(UINib(nibName: "MyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Itemcell");
-        loadData()
-       
         
-        /*guard let url = URL(string: "https://jsonplaceholder.typicode.com/photos") else {return}
-        
-        let task = URLSession.shared.dataTask(with: url){
-            (data , response , error) in
-            guard let dataResponse = data,
-                error == nil else{
-                    print(error?.localizedDescription ?? "Response error")
-                    return}
-            do{
-                let JsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: [])
-                print(JsonResponse)
-            }catch let parsingError{
-                print("Error", parsingError)
-            }
-        }
-        task.resume()*/
-
-        // Do any additional setup after loading the view.
     }
-    
+
 
 }
