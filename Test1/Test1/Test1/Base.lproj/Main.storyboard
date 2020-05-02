@@ -133,7 +133,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="0Lr-pA-JAx" kind="push" identifier="segue" id="neq-nK-GbX"/>
+                                            <segue destination="0Lr-pA-JAx" kind="push" identifier="segue" id="neq-nK-GbX">
+                                                <segue key="commit" inheritsFrom="parent" id="iKJ-x9-An2"/>
+                                                <segue key="preview" inheritsFrom="commit" id="HjP-yw-q4g"/>
+                                            </segue>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -176,4 +179,7 @@
             <point key="canvasLocation" x="-39.200000000000003" y="27.436281859070466"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="neq-nK-GbX"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -115,9 +115,6 @@ class SecondViewController: UIViewController ,UICollectionViewDelegate, UICollec
         self.globalTitle = mData.title
 
         //changing view by using segue
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let destination = storyboard.instantiateViewController(withIdentifier: "LastView") as! MyLastViewController
-        navigationController?.pushViewController(destination, animated: true)
         performSegue(withIdentifier: "segue", sender: self)
         
        
