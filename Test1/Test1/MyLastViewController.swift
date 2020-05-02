@@ -28,7 +28,7 @@ class MyLastViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.MyLastIMG.image = image
                             self.MyLastID.text = "ID: " + self.verificationId
-                            self.MyLastTitles.text = self.verificationTitle
+                            self.MyLastTitles.text = "Title: " + self.verificationTitle
                             
                         }
                     } else {
